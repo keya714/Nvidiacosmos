@@ -31,17 +31,30 @@ def load_model(model_name):
     except Exception as e:
         print(f"Warning: Could not login to HuggingFace: {e}")
     
-    # Load model with proper authentication - try vision model first for VL models
+    # Load model with proper authentication - use Qwen2VL specific class for Qwen models
     try:
-        model = transformers.AutoModelForVision2Seq.from_pretrained(
-            model_name, 
-            torch_dtype=torch.float16, 
-            device_map="auto",
-            token=hf_token,
-            trust_remote_code=True
-        )
-        print("Loaded as Vision2Seq model")
-    except (ValueError, OSError) as e:
+        if "qwen2-vl" in model_name.lower():
+            # Use Qwen2VL specific class
+            from transformers import Qwen2VLForConditionalGeneration
+            model = Qwen2VLForConditionalGeneration.from_pretrained(
+                model_name, 
+                torch_dtype=torch.float16, 
+                device_map="auto",
+                token=hf_token,
+                trust_remote_code=True
+            )
+            print("Loaded as Qwen2VL model")
+        else:
+            # Try general vision model
+            model = transformers.AutoModelForVision2Seq.from_pretrained(
+                model_name, 
+                torch_dtype=torch.float16, 
+                device_map="auto",
+                token=hf_token,
+                trust_remote_code=True
+            )
+            print("Loaded as Vision2Seq model")
+    except (ValueError, OSError, ImportError) as e:
         # Try causal LM if vision model fails
         print(f"Trying as CausalLM model...")
         try:
