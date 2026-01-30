@@ -31,18 +31,8 @@ def load_model(model_name):
     except Exception as e:
         print(f"Warning: Could not login to HuggingFace: {e}")
     
-    # Load model with proper authentication
+    # Load model with proper authentication - try vision model first for VL models
     try:
-        model = transformers.AutoModelForCausalLM.from_pretrained(
-            model_name, 
-            torch_dtype=torch.float16, 
-            device_map="auto",
-            token=hf_token,
-            trust_remote_code=True
-        )
-    except Exception as e:
-        # Try vision-language model
-        print(f"Trying as vision-language model: {e}")
         model = transformers.AutoModelForVision2Seq.from_pretrained(
             model_name, 
             torch_dtype=torch.float16, 
@@ -50,6 +40,21 @@ def load_model(model_name):
             token=hf_token,
             trust_remote_code=True
         )
+        print("Loaded as Vision2Seq model")
+    except (ValueError, OSError) as e:
+        # Try causal LM if vision model fails
+        print(f"Trying as CausalLM model...")
+        try:
+            model = transformers.AutoModelForCausalLM.from_pretrained(
+                model_name, 
+                torch_dtype=torch.float16, 
+                device_map="auto",
+                token=hf_token,
+                trust_remote_code=True
+            )
+            print("Loaded as CausalLM model")
+        except Exception as e2:
+            raise ValueError(f"Could not load model as Vision2Seq or CausalLM: {e2}")
     
     processor = transformers.AutoProcessor.from_pretrained(
         model_name,
