@@ -205,21 +205,25 @@
 </head>
 <body>
     <div class="container">
-        <h1>🎬 Gemini Video Processor</h1>
+        <h1>🎬 Vision Language Model Video Processor</h1>
         
         <div class="info-box">
-            💡 Process videos using Gemini/Gemma vision models from HuggingFace. Enter your video path, customize the prompt, and select your model.
+            💡 Process videos using Vision-Language models from HuggingFace. Enter your video path, customize the prompt, and select your model. For gated models (Gemma), request access at HuggingFace first.
         </div>
 
         <form id="videoForm">
             <div class="form-group">
                 <label for="model_name">Model Name</label>
-                <input type="text" id="model_name" name="model_name" value="google/gemma-2b-it" required>
+                <input type="text" id="model_name" name="model_name" value="Qwen/Qwen2-VL-2B-Instruct" required>
                 <div class="model-suggestions">
-                    Suggestions: 
-                    <span onclick="setModel('google/gemma-2b-it')">gemma-2b-it</span>
-                    <span onclick="setModel('google/gemma-7b-it')">gemma-7b-it</span>
-                    <span onclick="setModel('google/paligemma-3b-mix-224')">paligemma-3b-mix-224</span>
+                    Open Models: 
+                    <span onclick="setModel('Qwen/Qwen2-VL-2B-Instruct')">Qwen2-VL-2B</span>
+                    <span onclick="setModel('Qwen/Qwen2-VL-7B-Instruct')">Qwen2-VL-7B</span>
+                    <span onclick="setModel('llava-hf/llava-1.5-7b-hf')">LLaVA-1.5-7B</span>
+                    <span onclick="setModel('microsoft/Phi-3-vision-128k-instruct')">Phi-3-Vision</span>
+                    | Gated: 
+                    <span onclick="setModel('google/gemma-2b-it')">Gemma-2B</span>
+                    <span onclick="setModel('google/paligemma-3b-mix-224')">PaliGemma</span>
                 </div>
             </div>
 

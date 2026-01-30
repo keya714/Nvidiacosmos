@@ -19,14 +19,37 @@ def load_model(model_name):
     
     hf_token = os.getenv("HF_TOKEN")
     
-    # Load Gemini model
-    model = transformers.AutoModelForCausalLM.from_pretrained(
-        model_name, 
-        torch_dtype=torch.float16, 
-        device_map="auto",
-        token=hf_token,
-        trust_remote_code=True
-    )
+    if not hf_token:
+        raise ValueError("HF_TOKEN environment variable is not set. Please set it with your HuggingFace token.")
+    
+    print(f"Loading model: {model_name}...")
+    
+    # Try to login with the token
+    from huggingface_hub import login
+    try:
+        login(token=hf_token)
+    except Exception as e:
+        print(f"Warning: Could not login to HuggingFace: {e}")
+    
+    # Load model with proper authentication
+    try:
+        model = transformers.AutoModelForCausalLM.from_pretrained(
+            model_name, 
+            torch_dtype=torch.float16, 
+            device_map="auto",
+            token=hf_token,
+            trust_remote_code=True
+        )
+    except Exception as e:
+        # Try vision-language model
+        print(f"Trying as vision-language model: {e}")
+        model = transformers.AutoModelForVision2Seq.from_pretrained(
+            model_name, 
+            torch_dtype=torch.float16, 
+            device_map="auto",
+            token=hf_token,
+            trust_remote_code=True
+        )
     
     processor = transformers.AutoProcessor.from_pretrained(
         model_name,
@@ -35,6 +58,7 @@ def load_model(model_name):
     )
     
     current_model_name = model_name
+    print(f"Model loaded successfully!")
 
 def save_to_csv(video_path, prompt, model_name, fps, output):
     """Save prompt and output to CSV file"""
@@ -91,7 +115,7 @@ def process_video():
         data = request.json
         video_path = data.get('video_path')
         prompt = data.get('prompt')
-        model_name = data.get('model_name', 'google/gemma-2b-it')
+        model_name = data.get('model_name', 'Qwen/Qwen2-VL-2B-Instruct')
         fps = int(data.get('fps', 1))
         
         # Load model if not loaded or if model name changed
