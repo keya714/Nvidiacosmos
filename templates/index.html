@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NVIDIA Cosmos Video Processor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0d1117;
+            color: #c9d1d9;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #58a6ff;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 2em;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #8b949e;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #c9d1d9;
+            font-size: 14px;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #58a6ff;
+            background: #0d1117;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+            font-family: inherit;
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 100px;
+            gap: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px 24px;
+            background: #238636;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #2ea043;
+        }
+
+        button:disabled {
+            background: #21262d;
+            color: #484f58;
+            cursor: not-allowed;
+        }
+
+        .output-section {
+            margin-top: 30px;
+            padding: 20px;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .output-section.show {
+            display: block;
+        }
+
+        .output-section h2 {
+            color: #58a6ff;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .output-text {
+            background: #0d1117;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #30363d;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.6;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 13px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #8b949e;
+        }
+
+        .spinner {
+            border: 3px solid #30363d;
+            border-top: 3px solid #58a6ff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: #da3633;
+            color: white;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .error.show {
+            display: block;
+        }
+
+        .info-box {
+            background: #1f6feb1a;
+            border: 1px solid #1f6feb;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #79c0ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎥 NVIDIA Cosmos Video Processor</h1>
+        
+        <div class="info-box">
+            💡 Process videos using NVIDIA Cosmos models. Enter your video path, customize the prompt, and select your model.
+        </div>
+
+        <form id="videoForm">
+            <div class="form-group">
+                <label for="model_name">Model Name</label>
+                <input type="text" id="model_name" name="model_name" value="nvidia/Cosmos-Reason2-8B" required>
+            </div>
+
+            <div class="form-group">
+                <label for="video_path">Video Path</label>
+                <div class="input-row">
+                    <input type="text" id="video_path" name="video_path" placeholder="file:///path/to/your/video.mp4" required>
+                    <input type="number" id="fps" name="fps" placeholder="FPS" value="4" min="1" max="60">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="prompt">Prompt</label>
+                <textarea id="prompt" name="prompt" required>Is it safe to turn right? Answer the question using the following format:
+
+<think>
+Your reasoning.
+</think>
+
+Write your final answer immediately after the </think> tag.</textarea>
+            </div>
+
+            <button type="submit" id="submitBtn">Process Video</button>
+        </form>
+
+        <div class="error" id="errorMsg"></div>
+
+        <div class="output-section" id="outputSection">
+            <h2>Output</h2>
+            <div class="output-text" id="outputText"></div>
+        </div>
+
+        <div class="loading" id="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Processing video... This may take a while.</p>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('videoForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const loading = document.getElementById('loading');
+        const outputSection = document.getElementById('outputSection');
+        const outputText = document.getElementById('outputText');
+        const errorMsg = document.getElementById('errorMsg');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Hide previous results
+            outputSection.classList.remove('show');
+            errorMsg.classList.remove('show');
+            loading.style.display = 'block';
+            submitBtn.disabled = true;
+
+            const formData = {
+                video_path: document.getElementById('video_path').value,
+                prompt: document.getElementById('prompt').value,
+                model_name: document.getElementById('model_name').value,
+                fps: document.getElementById('fps').value
+            };
+
+            try {
+                const response = await fetch('/process', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    outputText.textContent = data.output;
+                    outputSection.classList.add('show');
+                } else {
+                    errorMsg.textContent = `Error: ${data.error}`;
+                    errorMsg.classList.add('show');
+                }
+            } catch (error) {
+                errorMsg.textContent = `Error: ${error.message}`;
+                errorMsg.classList.add('show');
+            } finally {
+                loading.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
