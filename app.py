@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 import transformers
 import torch
 import os
+from transformers import AutoModelForVision2Seq, AutoProcessor
 
 app = Flask(__name__)
 
@@ -15,17 +16,31 @@ def load_model(model_name):
     
     hf_token = os.getenv("HF_TOKEN")
     
-    model = transformers.Qwen3VLForConditionalGeneration.from_pretrained(
-        model_name, 
-        dtype=torch.float16, 
-        device_map="auto", 
-        attn_implementation="sdpa", 
-        token=hf_token
-    )
+    try:
+        # Try to import Qwen3VLForConditionalGeneration directly
+        model = transformers.Qwen3VLForConditionalGeneration.from_pretrained(
+            model_name, 
+            dtype=torch.float16, 
+            device_map="auto", 
+            attn_implementation="sdpa", 
+            token=hf_token,
+            trust_remote_code=True
+        )
+    except (AttributeError, ImportError):
+        # Fall back to AutoModelForVision2Seq
+        model = AutoModelForVision2Seq.from_pretrained(
+            model_name, 
+            dtype=torch.float16, 
+            device_map="auto", 
+            attn_implementation="sdpa", 
+            token=hf_token,
+            trust_remote_code=True
+        )
     
-    processor = transformers.AutoProcessor.from_pretrained(
+    processor = AutoProcessor.from_pretrained(
         model_name,
-        token=hf_token
+        token=hf_token,
+        trust_remote_code=True
     )
     
     current_model_name = model_name
