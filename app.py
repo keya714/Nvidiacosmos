@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, jsonify
 import transformers
 import torch
 import os
-from transformers import AutoModelForVision2Seq, AutoProcessor
 
 app = Flask(__name__)
 
@@ -28,7 +27,7 @@ def load_model(model_name):
         )
     except (AttributeError, ImportError):
         # Fall back to AutoModelForVision2Seq
-        model = AutoModelForVision2Seq.from_pretrained(
+        model = transformers.AutoModelForVision2Seq.from_pretrained(
             model_name, 
             dtype=torch.float16, 
             device_map="auto", 
@@ -37,7 +36,7 @@ def load_model(model_name):
             trust_remote_code=True
         )
     
-    processor = AutoProcessor.from_pretrained(
+    processor = transformers.AutoProcessor.from_pretrained(
         model_name,
         token=hf_token,
         trust_remote_code=True
