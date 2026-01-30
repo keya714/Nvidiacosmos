@@ -4,3 +4,4 @@ torch
 torchvision
 accelerate
 qwen-vl-utils
+av
