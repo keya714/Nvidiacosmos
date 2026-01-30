@@ -2,8 +2,6 @@ from flask import Flask, render_template, request, jsonify
 import transformers
 import torch
 import os
-import csv
-from datetime import datetime
 
 app = Flask(__name__)
 
@@ -45,28 +43,6 @@ def load_model(model_name):
     )
     
     current_model_name = model_name
-
-def save_to_csv(video_path, prompt, model_name, fps, output):
-    """Save prompt and output to CSV file"""
-    csv_file = 'results.csv'
-    file_exists = os.path.isfile(csv_file)
-    
-    with open(csv_file, 'a', newline='', encoding='utf-8') as f:
-        writer = csv.writer(f)
-        
-        # Write header if file doesn't exist
-        if not file_exists:
-            writer.writerow(['Timestamp', 'Model Name', 'Video Path', 'FPS', 'Prompt', 'Output'])
-        
-        # Write data
-        writer.writerow([
-            datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-            model_name,
-            video_path,
-            fps,
-            prompt,
-            output
-        ])
 
 @app.route('/')
 def index():
@@ -131,14 +107,9 @@ def process_video():
             clean_up_tokenization_spaces=False,
         )
         
-        result_output = output_text[0] if output_text else ''
-        
-        # Save to CSV
-        save_to_csv(video_path, prompt, model_name, fps, result_output)
-        
         return jsonify({
             'success': True,
-            'output': result_output
+            'output': output_text[0] if output_text else ''
         })
         
     except Exception as e:

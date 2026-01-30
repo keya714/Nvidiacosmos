@@ -5,3 +5,5 @@ torchvision
 accelerate
 qwen-vl-utils
 av
+opencv-python
+pillow
