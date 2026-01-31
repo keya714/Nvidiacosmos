@@ -1,4 +1,4 @@
-flask
+flask --ignore-installed blinker
 transformers>=4.37.0
 torch
 torchvision

@@ -31,7 +31,7 @@ def load_model(model_name):
     except Exception as e:
         print(f"Warning: Could not login to HuggingFace: {e}")
     
-    # Load model with proper authentication - use Qwen2VL specific class for Qwen models
+    # Load model with proper authentication - use model-specific classes
     if "qwen2-vl" in model_name.lower():
         # Use Qwen2VL specific class
         from transformers import Qwen2VLForConditionalGeneration
@@ -43,16 +43,38 @@ def load_model(model_name):
             trust_remote_code=True
         )
         print("Loaded as Qwen2VL model")
-    else:
-        # Try general vision model
-        model = transformers.AutoModelForVision2Seq.from_pretrained(
+    elif "llava" in model_name.lower():
+        # Use LLaVA specific class
+        from transformers import LlavaForConditionalGeneration
+        model = LlavaForConditionalGeneration.from_pretrained(
             model_name, 
             torch_dtype=torch.float16, 
             device_map="auto",
             token=hf_token,
             trust_remote_code=True
         )
-        print("Loaded as Vision2Seq model")
+        print("Loaded as LLaVA model")
+    elif "phi-3-vision" in model_name.lower():
+        # Use Phi3 Vision specific class
+        from transformers import Phi3VForCausalLM
+        model = Phi3VForCausalLM.from_pretrained(
+            model_name, 
+            torch_dtype=torch.float16, 
+            device_map="auto",
+            token=hf_token,
+            trust_remote_code=True
+        )
+        print("Loaded as Phi-3-Vision model")
+    else:
+        # Try generic AutoModel with trust_remote_code
+        model = transformers.AutoModel.from_pretrained(
+            model_name, 
+            torch_dtype=torch.float16, 
+            device_map="auto",
+            token=hf_token,
+            trust_remote_code=True
+        )
+        print("Loaded as AutoModel")
     
     processor = transformers.AutoProcessor.from_pretrained(
         model_name,
