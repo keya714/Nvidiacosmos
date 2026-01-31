@@ -1,9 +1,7 @@
-flask --ignore-installed blinker
+flask
 transformers>=4.37.0
 torch
 torchvision
 accelerate
 qwen-vl-utils
 av
-opencv-python
-pillow
