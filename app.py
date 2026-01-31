@@ -2,8 +2,27 @@ from flask import Flask, render_template, request, jsonify
 import transformers
 import torch
 import os
+import csv
+from datetime import datetime
 
 app = Flask(__name__)
+
+# CSV file path
+CSV_FILE = 'results.csv'
+
+# Initialize CSV file with headers if it doesn't exist
+def init_csv():
+    if not os.path.exists(CSV_FILE):
+        with open(CSV_FILE, 'w', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            writer.writerow(['Timestamp', 'Model Name', 'Video Path', 'FPS', 'Prompt', 'Answer'])
+
+# Save result to CSV
+def save_to_csv(model_name, video_path, fps, prompt, answer):
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    with open(CSV_FILE, 'a', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        writer.writerow([timestamp, model_name, video_path, fps, prompt, answer])
 
 # Store model and processor globally
 model = None
@@ -107,9 +126,15 @@ def process_video():
             clean_up_tokenization_spaces=False,
         )
         
+        # Get the output
+        answer = output_text[0] if output_text else ''
+        
+        # Save to CSV
+        save_to_csv(model_name, video_path, fps, prompt, answer)
+        
         return jsonify({
             'success': True,
-            'output': output_text[0] if output_text else ''
+            'output': answer
         })
         
     except Exception as e:
@@ -119,4 +144,5 @@ def process_video():
         }), 500
 
 if __name__ == '__main__':
+    init_csv()
     app.run(debug=True, host='0.0.0.0', port=5000)
