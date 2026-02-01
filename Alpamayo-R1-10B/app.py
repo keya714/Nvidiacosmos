@@ -7,7 +7,7 @@ import os
 from datetime import datetime
 from pathlib import Path
 import base64
-from transformers import AutoProcessor, AutoModelForVision2Seq
+from transformers import AutoProcessor, AutoModelForCausalLM
 import torch
 from PIL import Image
 import io
@@ -35,7 +35,7 @@ def load_model():
     global model, processor
     print("Loading model...")
     processor = AutoProcessor.from_pretrained(model_name, trust_remote_code=True)
-    model = AutoModelForVision2Seq.from_pretrained(
+    model = AutoModelForCausalLM.from_pretrained(
         model_name,
         torch_dtype=torch.float16,
         device_map="auto",
@@ -75,10 +75,9 @@ def extract_video_frames(video_bytes, num_frames=8):
 def save_to_csv(data):
     """Save results to CSV"""
     csv_filename = f"result_{model_name.replace('/', '_')}.csv"
-    csv_path = f"/mnt/user-data/outputs/{csv_filename}"
+    csv_path = csv_filename  # Save in current folder
     
-    # Ensure output directory exists
-    os.makedirs("/mnt/user-data/outputs", exist_ok=True)
+    # No need to create output directory
     
     # Check if file exists
     file_exists = os.path.exists(csv_path)

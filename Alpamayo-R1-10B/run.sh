@@ -28,8 +28,20 @@ fi
 
 echo "✓ Dependencies installed"
 
-# Create outputs directory if it doesn't exist
-mkdir -p /mnt/user-data/outputs
+# Prompt for Hugging Face token
+echo ""
+echo "🔑 Hugging Face Authentication"
+echo "If the model requires authentication, enter your HF token."
+echo "Press Enter to skip if not required."
+read -p "Enter your Hugging Face token: " HF_TOKEN
+
+if [ ! -z "$HF_TOKEN" ]; then
+    export HF_TOKEN="$HF_TOKEN"
+    export HUGGING_FACE_HUB_TOKEN="$HF_TOKEN"
+    echo "✓ Token set"
+else
+    echo "ℹ Proceeding without token"
+fi
 
 echo ""
 echo "🚀 Starting backend server on port 5000..."
@@ -43,7 +55,7 @@ echo "=================================="
 echo ""
 
 # Start the FastAPI server on port 5000
-python3 backend.py --port 5000 &
+python3 app.py --port 5000 &
 BACKEND_PID=$!
 
 # Wait a moment for the server to start
@@ -60,7 +72,7 @@ if ps -p $BACKEND_PID > /dev/null; then
     echo "   4. Adjust temperature if needed"
     echo "   5. Click 'Process Video'"
     echo ""
-    echo "Results will be saved to: /mnt/user-data/outputs/result_nvidia_Alpamayo-R1-10B.csv"
+    echo "Results will be saved to: result_nvidia_Alpamayo-R1-10B.csv"
     echo ""
     
     # Wait for the backend process
