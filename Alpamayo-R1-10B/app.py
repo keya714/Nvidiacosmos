@@ -7,7 +7,7 @@ import os
 from datetime import datetime
 from pathlib import Path
 import base64
-from transformers import AutoProcessor, AutoModelForCausalLM
+from transformers import AutoTokenizer, AutoImageProcessor, AutoModel
 import torch
 from PIL import Image
 import io
@@ -27,15 +27,17 @@ app.add_middleware(
 
 # Global variables for model
 model = None
-processor = None
+tokenizer = None
+image_processor = None
 model_name = "nvidia/Alpamayo-R1-10B"
 
 def load_model():
     """Load the model and processor"""
-    global model, processor
+    global model, tokenizer, image_processor
     print("Loading model...")
-    processor = AutoProcessor.from_pretrained(model_name, trust_remote_code=True)
-    model = AutoModelForCausalLM.from_pretrained(
+    tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+    image_processor = AutoImageProcessor.from_pretrained(model_name, trust_remote_code=True)
+    model = AutoModel.from_pretrained(
         model_name,
         torch_dtype=torch.float16,
         device_map="auto",
@@ -122,11 +124,11 @@ async def process_video(
             )
         
         # Prepare inputs
-        inputs = processor(
-            text=prompt,
-            images=frames,
-            return_tensors="pt"
-        ).to(model.device)
+        text_inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
+        image_inputs = image_processor(images=frames, return_tensors="pt").to(model.device)
+        
+        # Combine inputs
+        inputs = {**text_inputs, **image_inputs}
         
         # Generate response
         with torch.no_grad():
@@ -138,7 +140,7 @@ async def process_video(
             )
         
         # Decode response
-        response = processor.decode(outputs[0], skip_special_tokens=True)
+        response = tokenizer.decode(outputs[0], skip_special_tokens=True)
         
         # Calculate response time
         response_time = time.time() - start_time
