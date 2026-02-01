@@ -7,7 +7,7 @@ import os
 from datetime import datetime
 from pathlib import Path
 import base64
-from transformers import AutoTokenizer, AutoImageProcessor, AutoModel
+from transformers import AutoTokenizer, AutoImageProcessor, AutoModel, AutoConfig
 import torch
 from PIL import Image
 import io
@@ -27,18 +27,20 @@ app.add_middleware(
 
 # Global variables for model
 model = None
-tokenizer = None
-image_processor = None
 model_name = "nvidia/Alpamayo-R1-10B"
 
 def load_model():
-    """Load the model and processor"""
-    global model, tokenizer, image_processor
+    """Load the model"""
+    global model
     print("Loading model...")
-    tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
-    image_processor = AutoImageProcessor.from_pretrained(model_name, trust_remote_code=True)
+    
+    # Load config first to get custom classes
+    config = AutoConfig.from_pretrained(model_name, trust_remote_code=True)
+    
+    # Load model with trust_remote_code to get custom implementation
     model = AutoModel.from_pretrained(
         model_name,
+        config=config,
         torch_dtype=torch.float16,
         device_map="auto",
         trust_remote_code=True
@@ -123,24 +125,16 @@ async def process_video(
                 content={"error": "Could not extract frames from video"}
             )
         
-        # Prepare inputs
-        text_inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
-        image_inputs = image_processor(images=frames, return_tensors="pt").to(model.device)
-        
-        # Combine inputs
-        inputs = {**text_inputs, **image_inputs}
-        
-        # Generate response
+        # Use model's chat method or generate method
+        # The custom model should have its own inference method
         with torch.no_grad():
-            outputs = model.generate(
-                **inputs,
+            response = model.generate(
+                prompt=prompt,
+                images=frames,
                 max_new_tokens=512,
                 temperature=temperature,
                 do_sample=temperature > 0
             )
-        
-        # Decode response
-        response = tokenizer.decode(outputs[0], skip_special_tokens=True)
         
         # Calculate response time
         response_time = time.time() - start_time

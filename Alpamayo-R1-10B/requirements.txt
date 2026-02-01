@@ -6,3 +6,6 @@ torch
 pillow
 opencv-python
 accelerate
+sentencepiece
+protobuf
+tiktoken
