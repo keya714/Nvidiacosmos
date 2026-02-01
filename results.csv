@@ -498,3 +498,635 @@ The video depicts a controlled and equipped environment that is safe for the ast
 3. **Mission Context**: The astronauts are shown in a stable, microgravity environment with no visible immediate threats (e.g., debris, equipment failure). Their floating posture and equipment imply routine activity rather than emergency.  
 
 While space itself remains inherently hazardous, the shown scene highlights the safety measures and technology that enable astronauts to operate safely during a mission. Thus, within the scope of their prepared environment, it is safe."
+2026-01-31 22:42:29,nvidia/Cosmos-Reason2-8B,Satellite_s_View_Approaching_Satellite.mp4,4,"You are an autonomous satellite navigation and planning system.
+
+You are given a video sequence from an onboard satellite camera showing the
+current orbital scene, including nearby satellites, relative motion, distance
+changes, and environmental context.
+
+Your task is to determine the most appropriate NEXT ACTION for the satellite.
+
+---
+
+### Instructions
+- Analyze the scene and infer spatial relationships and motion trends.
+- Identify any risks (collision, unsafe proximity, drift) or mission goals
+  (approach, inspection, station-keeping).
+- Use realistic orbital mechanics and fuel-efficient maneuvers.
+- Prioritize safety and mission continuity.
+
+---
+
+### Output Format (MANDATORY)
+
+Answer the question using the following format:
+
+<think>
+Provide a brief, high-level justification of the decision.
+Focus on observations and conclusions, not hidden internal reasoning.
+</think>
+
+Write your final answer immediately after the </think> tag.
+
+The final answer must include:
+- Action Type
+- Direction of motion
+- Magnitude (qualitative or Δv estimate)
+- Purpose
+","<think>
+Okay, let's see. The user provided a detailed environment setup where there are two satellites in orbit. Satellite 1 is on the left with a cylindrical body and a solar panel, and Satellite 2 is on the right, larger with two solar panels. The sun is coming up, causing glare and lens flares. The camera is moving closer to Satellite 2.
+
+The task is to predict the next action for the satellite. The possible actions are things like adjusting position, avoiding collision, station-keeping, or maybe something else. 
+
+First, I need to consider the relative positions. Satellite 2 is moving closer to the camera, which is probably part of Satellite 1's camera. Since the camera is pushing in, maybe Satellite 1 is trying to get a better view or inspect Satellite 2. But the sun's glare might be an issue. However, the main movement shown is the camera moving closer to Satellite 2. 
+
+Since Satellite 2 is the focus, maybe Satellite 1 is adjusting its position to maintain a safe distance or to align for a rendezvous. Alternatively, if they're in close proximity, there might be a need to avoid collision. But the video shows ""relative motion"" and ""changing distance,"" so perhaps they're in a docking scenario. 
+
+The solar panels on both satellites suggest they need to maintain orientation for power. If the sun is coming up, maybe they need to adjust their solar panels to avoid sun glare affecting instruments. But the main action here is the camera moving closer. If the camera is part of Satellite 1, then Satellite 1 might be maneuvering to get a closer look at Satellite 2. 
+
+Alternatively, if Satellite 2 is moving closer, maybe Satellite 1 is performing a station-keeping maneuver to stay in its orbit while observing. But the prompt says the camera is pushing in, so maybe Satellite 1 is moving towards Satellite 2. However, in orbital mechanics, moving closer would require a thrust in the direction of the target. 
+
+But the key here is to determine the next action. Since the camera is moving closer, the next action might be a slight adjustment to maintain the desired position or to prepare for docking. Alternatively, if they're in a formation, maybe maintaining the relative position. 
+
+Given that the sun is rising and causing glare, maybe the satellites need to adjust their orientation. But the main movement shown is the camera moving closer. So the next action could be a slight thrust to adjust position relative to Satellite 2, perhaps to align for docking or inspection. 
+
+Alternatively, if the distance is changing, maybe Satellite 1 is performing a station-keeping maneuver to stay in its orbit while the camera focuses on Satellite 2. But the problem states that the camera is part of the satellite, so if the camera is moving closer, the satellite itself is moving. 
+
+So, the next action might be a small thrust to adjust position, either to maintain distance or to get closer. Since the camera is pushing in, maybe the satellite is moving closer to Satellite 2. Therefore, the action would be a thrust in the direction of Satellite 2 to reduce the distance. 
+
+Alternatively, if the goal is to inspect, maybe the satellite is maneuvering to position itself for a better view. But the exact direction depends on the relative positions. Since Satellite 2 is on the right and moving closer, maybe Satellite 1 is moving rightward. 
+
+But in orbital mechanics, thrust direction depends on the desired change. If the satellite wants to approach Satellite 2, it would thrust in the direction of Satellite 2. So the action would be ""thrust in the direction of Satellite 2 to reduce distance and prepare for docking or inspection."" 
+
+Alternatively, if the satellites are in formation, maybe maintaining the relative position. But the problem states that the camera is moving closer, so the action is likely a maneuver to adjust position. 
+
+So the answer would be a thrust in the direction of Satellite 2 to adjust position, possibly for docking or inspection. The purpose would be to maintain safe distance or prepare for rendezvous.
+</think>
+
+Thrust in the direction of Satellite 2 to adjust position and reduce distance, preparing for potential docking or inspection while maintaining orbital stability.",43.39
+2026-01-31 22:55:25,nvidia/Cosmos-Reason2-8B,Satellite_s_View_Approaching_Satellite.mp4,4,"You are an autonomous satellite navigation and planning system.
+
+You are given a video sequence from an onboard satellite camera showing the
+current orbital scene, including nearby satellites, relative motion, distance
+changes, and environmental context.
+
+Your task is to determine the most appropriate NEXT ACTION for the satellite.
+
+---
+
+### Instructions
+- Analyze the scene and infer spatial relationships and motion trends.
+- Identify any risks (collision, unsafe proximity, drift) or mission goals
+  (approach, inspection, station-keeping).
+- Use realistic orbital mechanics and fuel-efficient maneuvers.
+- Prioritize safety and mission continuity.
+
+---
+
+### Output Format (MANDATORY)
+
+Answer the question using the following format:
+
+<think>
+Provide a brief, high-level justification of the decision.
+Focus on observations and conclusions, not hidden internal reasoning.
+</think>
+
+Write your final answer immediately after the </think> tag.
+
+The final answer must include:
+- Action Type
+- Direction of motion
+- Magnitude (qualitative or Δv estimate)
+- Purpose
+","<think>
+Okay, let's break this down. The video shows two satellites in orbit. Satellite 1 is on the left with a cylindrical body and a solar panel, while Satellite 2 is on the right, larger with two solar panels. The camera is moving closer to Satellite 2, which is rotating slowly. The sun is coming up, causing lens flares and reflections.
+
+The task is to predict the next action for Satellite 2. Since the camera is zooming in and panning right, focusing on Satellite 2, maybe the satellite is being inspected or tracked. The rotation suggests it's adjusting orientation. The solar panels are extended, so they're likely generating power. The sun's position might affect operations, so maybe adjusting to maintain optimal solar exposure. Also, the presence of another satellite nearby could mean they need to maintain safe distance. Since the camera is moving closer, perhaps Satellite 2 is preparing for a rendezvous or docking, or just routine station-keeping. The rotation could be part of aligning for communication or power. Considering orbital mechanics, a slight thrust to adjust position or orientation makes sense. The action should be a maneuver to maintain orbit or adjust orientation. The direction would depend on the current motion. Since the camera is panning right, maybe Satellite 2 is moving in that direction. Alternatively, if it's rotating, the action might be a thruster burn to stabilize. The purpose could be maintaining orbit, avoiding collision, or preparing for a task. Given the context, a small maneuver to adjust position or orientation seems likely.
+</think>
+
+Adjust orientation via thruster burn to align solar panels with sunlight for optimal power generation while maintaining orbital position.",19.06
+2026-01-31 22:57:06,nvidia/Cosmos-Reason2-8B,Satellite_s_View_Approaching_Satellite.mp4,4,"You are an autonomous satellite navigation and planning system.
+
+You are given a video sequence from an onboard satellite camera showing the
+current orbital scene, including nearby satellites, relative motion, orientation,
+and lighting conditions.
+
+Your task is to determine the most appropriate NEXT ACTION for the satellite.
+
+---
+
+### STRICT OUTPUT RULES (MANDATORY)
+1. You MUST use the exact format below.
+2. The <think> section must be short and high-level.
+3. The final answer MUST be valid JSON.
+4. Do NOT include any text outside the specified format.
+5. Do NOT include explanations outside the <think> block.
+
+---
+
+Answer the question using the following format:
+
+<think>
+Brief justification based on observations and conclusions only.
+</think>
+
+{
+  ""action_type"": """",
+  ""direction"": """",
+  ""magnitude"": """",
+  ""purpose"": """"
+}
+","<think>
+Okay, let's break this down. The video shows a satellite in orbit with another satellite approaching. The main satellite has solar panels and is moving towards the approaching one. The camera is static, so the movement is relative. The approaching satellite is coming from the upper right, getting closer.
+
+The task is to predict the next action. Since the approaching satellite is moving closer, the main satellite needs to respond. In orbital mechanics, when two satellites approach each other, they might need to adjust their trajectory to avoid collision. The main satellite could either maneuver to maintain a safe distance or prepare for docking if that's the intention. But the video doesn't show docking, just the approach. So the likely action is a maneuver to adjust position. The direction would be away from the approaching satellite, maybe retrograde or a lateral move. The magnitude would depend on the required delta-v, but since it's a prediction, a moderate adjustment makes sense. The purpose is collision avoidance.
+</think>
+
+{
+  ""action_type"": ""maneuver"",
+  ""direction"": ""away from the approaching satellite"",
+  ""magnitude"": ""moderate"",
+  ""purpose"": ""collision avoidance""
+}",14.07
+2026-01-31 22:58:16,nvidia/Cosmos-Reason2-8B,Realistic_Orbital_Space_Footage_Generated (1).mp4,4,"You are an autonomous satellite navigation and planning system.
+
+You are given a video sequence from an onboard satellite camera showing the
+current orbital scene, including nearby satellites, relative motion, orientation,
+and lighting conditions.
+
+Your task is to determine the most appropriate NEXT ACTION for the satellite.
+
+---
+
+### STRICT OUTPUT RULES (MANDATORY)
+1. You MUST use the exact format below.
+2. The <think> section must be short and high-level.
+3. The final answer MUST be valid JSON.
+4. Do NOT include any text outside the specified format.
+5. Do NOT include explanations outside the <think> block.
+
+---
+
+Answer the question using the following format:
+
+<think>
+Brief justification based on observations and conclusions only.
+</think>
+
+{
+  ""action_type"": """",
+  ""direction"": """",
+  ""magnitude"": """",
+  ""purpose"": """"
+}
+","<think>
+Okay, let's break this down. The video is set in space with a satellite and a small asteroid. The satellite has solar panels and is stationary relative to the camera. The asteroid is moving away from the satellite, rotating slowly. The Earth is in the background with clouds and a blue atmosphere. The camera is fixed on the satellite, showing the asteroid moving right and rotating.
+
+The task is to predict the next action for the satellite. Since the asteroid is moving away and rotating, the satellite might need to adjust its position to maintain a safe distance or to continue observing. The solar panels are extended, so maybe the satellite is using them for power. The Earth's presence suggests possible orbital mechanics considerations, like gravitational influences. The camera is fixed, so the satellite isn't moving its camera, but the asteroid is moving. The satellite might need to maneuver to avoid collision or to keep the asteroid in frame. Since the asteroid is moving away, the satellite might need to adjust its trajectory to stay aligned or to prepare for a rendezvous. Alternatively, if the satellite is stationary, maybe it's just monitoring the asteroid's movement. But given that the asteroid is moving, the satellite might need to perform a slight maneuver to maintain its position relative to the asteroid. The direction would likely be opposite to the asteroid's movement, so maybe left or backward. The magnitude would depend on how fast the asteroid is moving. Since the asteroid is moving away, the satellite might need to move in the same direction to keep up, but since it's already stationary, perhaps it's adjusting its orientation. Wait, the satellite's solar panels are extended, so maybe it's using them for power, and the movement is to reposition. Alternatively, if the asteroid is moving away, the satellite might need to adjust its orbit to maintain a safe distance. The purpose could be to maintain a safe distance or to continue observation. So the action might be a slight maneuver to the right or left to adjust position. Considering the asteroid is moving to the right, the satellite might need to move left to stay aligned. Alternatively, if the satellite is fixed, maybe it's just observing. But since the asteroid is moving, the satellite might need to adjust. The answer should be a maneuver. So possible action: maneuver left to maintain relative position. Or maybe adjust orientation. But the problem says ""next action"" based on the current state. The asteroid is moving away, so the satellite might need to move in the same direction to keep it in view. But the camera is fixed, so maybe the satellite isn't moving. Wait, the camera is fixed on the satellite, so if the satellite moves, the camera would move. But the video shows the camera remains fixed, so the satellite isn't moving. Therefore, the asteroid is moving away, and the satellite is stationary. So maybe the next action is to adjust its orbit to follow the asteroid. But the satellite is already in a fixed position. Alternatively, the satellite might need to perform a small maneuver to correct its trajectory. Since the asteroid is moving away, the satellite might need to move in the same direction to maintain a safe distance. So the direction would be right, same as the asteroid. But the asteroid is moving away, so the satellite might need to move right to keep up. Alternatively, if the satellite is in a stable orbit, maybe it's just monitoring. But the problem states to predict the next action. Given that the asteroid is moving, the satellite might need to adjust its position. So the action could be a maneuver to the right to maintain relative position. The purpose would be to maintain a safe distance or to continue observation. So the answer would be maneuver right with a certain magnitude. But the exact direction depends on the relative motion. Since the asteroid is moving to the right, the satellite might need to move right to stay aligned. Alternatively, if the satellite is in a higher orbit, maybe it's moving slower. But the video shows the satellite is stationary relative to the camera, which is fixed. So the satellite isn't moving. Therefore, the next action might be to initiate a maneuver to adjust its orbit. But the problem says ""next action"" given the current state. Since the asteroid is moving away, the satellite might need to move in the same direction. So the action would be maneuver right. The magnitude would be a small adjustment. So the answer is maneuver right with a small magnitude to maintain relative position.
+</think>
+
+{
+  ""action_type"": ""maneuver"",
+  ""direction"": ""right"",
+  ""magnitude"": ""small"",
+  ""purpose"": ""maintain relative position with the asteroid""
+}",45.69
+2026-01-31 22:58:56,nvidia/Cosmos-Reason2-8B,Realistic_Orbital_Space_Footage_Generated.mp4,4,"You are an autonomous satellite navigation and planning system.
+
+You are given a video sequence from an onboard satellite camera showing the
+current orbital scene, including nearby satellites, relative motion, orientation,
+and lighting conditions.
+
+Your task is to determine the most appropriate NEXT ACTION for the satellite.
+
+---
+
+### STRICT OUTPUT RULES (MANDATORY)
+1. You MUST use the exact format below.
+2. The <think> section must be short and high-level.
+3. The final answer MUST be valid JSON.
+4. Do NOT include any text outside the specified format.
+5. Do NOT include explanations outside the <think> block.
+
+---
+
+Answer the question using the following format:
+
+<think>
+Brief justification based on observations and conclusions only.
+</think>
+
+{
+  ""action_type"": """",
+  ""direction"": """",
+  ""magnitude"": """",
+  ""purpose"": """"
+}
+","<think>
+Okay, let's break this down. The video shows a spacewalk with two astronauts and a satellite. The main satellite is in the top right with solar panels. The astronauts are floating, one closer to the camera, the other further away. The camera is moving slowly, maybe panning or zooming.
+
+The task is to predict the next action for the satellite. Since the astronauts are in a spacewalk, the satellite might need to maintain its position or adjust to avoid interference. The solar panels are extended, so maybe they need to stay aligned with the sun. The camera movement suggests the satellite is tracking the astronauts. Possible actions: adjust orientation to keep solar panels facing the sun, maintain position relative to the astronauts, or maybe prepare for a maneuver. Since the astronauts are moving, the satellite might need to stabilize or continue tracking. The most likely action would be adjusting orientation to ensure solar panels are optimally positioned for power, especially if the sun's position is changing. Alternatively, if the camera is panning, the satellite might be moving to follow the astronauts. But the problem states the camera is moving slowly, so maybe the satellite is adjusting its orientation to keep the astronauts in frame. However, the primary purpose of a satellite in orbit is usually power and communication. So, aligning solar panels with the sun makes sense. The sun is in the top right, so maybe the satellite needs to rotate slightly to keep the panels facing it. The action would be adjusting orientation, direction towards the sun, magnitude as needed. Purpose would be maintaining power supply. So the answer would be adjust orientation towards the sun to keep solar panels aligned.
+</think>
+
+{
+  ""action_type"": ""adjust orientation"",
+  ""direction"": ""towards the sun"",
+  ""magnitude"": ""gradual rotation"",
+  ""purpose"": ""maintain optimal solar panel alignment for power generation""
+}",20.37
+2026-01-31 23:03:57,nvidia/Cosmos-Reason2-8B,VTA_Bus_Entry_and_Fare_Kiosk.mp4,4,"You are a vision-based scene analysis system for a fare payment kiosk.
+
+You are given a video sequence showing a kiosk area where people may tap
+their cards or devices to pay fares, and others may be present in the scene.
+
+Your task is to analyze the video and count people accurately.
+
+---
+
+### Definitions (IMPORTANT)
+- ""total_people"": Total number of distinct individuals visible in the scene.
+- ""people_tapped"": Number of distinct individuals who completed a successful tap
+  on the kiosk during the video.
+- ""people_non_tapped"": Number of distinct individuals who did NOT complete a tap
+  during the video.
+- ""people_waiting"": Number of distinct individuals waiting in line and NOT yet
+  completed a tap at the end of the video.
+
+Each person must be counted only once per category.
+Ensure logical consistency:
+- people_tapped + people_non_tapped = total_people
+- people_waiting ≤ people_non_tapped
+
+---
+
+### STRICT OUTPUT RULES (MANDATORY)
+1. Output MUST be valid JSON.
+2. Output JSON ONLY — no text, no explanations, no markdown.
+3. Use integers only.
+4. If uncertain, return the most conservative count.
+5. Do NOT include any additional fields.
+
+---
+
+### Output Format (EXACT)
+
+{
+  ""total_people"": 0,
+  ""people_tapped"": 0,
+  ""people_non_tapped"": 0,
+  ""people_waiting"": 0
+}
+","{
+  ""total_people"": 4,
+  ""people_tapped"": 2,
+  ""people_non_tapped"": 2,
+  ""people_waiting"": 2
+}",5.08
+2026-01-31 23:06:32,nvidia/Cosmos-Reason2-8B,VTA_Bus_Fare_Evasion_CCTV.mp4,4,"You are a vision-based scene analysis system for a fare payment kiosk.
+
+You are given a video sequence showing a kiosk area where people may tap
+their cards or devices to pay fares, and others may be present in the scene.
+
+Your task is to analyze the video and count people accurately.
+
+---
+
+### Definitions (IMPORTANT)
+- ""total_people"": Total number of distinct individuals visible in the scene.
+- ""people_tapped"": Number of distinct individuals who completed a successful tap
+  on the kiosk during the video.
+- ""people_non_tapped"": Number of distinct individuals who did NOT complete a tap
+  during the video.
+- ""people_waiting"": Number of distinct individuals waiting in line and NOT yet
+  completed a tap at the end of the video.
+
+Each person must be counted only once per category.
+Ensure logical consistency:
+- people_tapped + people_non_tapped = total_people
+- people_waiting ≤ people_non_tapped
+
+---
+
+### STRICT OUTPUT RULES (MANDATORY)
+1. Output MUST be valid JSON.
+2. Output JSON ONLY — no text, no explanations, no markdown.
+3. Use integers only.
+4. If uncertain, return the most conservative count.
+5. Do NOT include any additional fields.
+
+---
+
+### Output Format (EXACT)
+
+{
+  ""total_people"": 0,
+  ""people_tapped"": 0,
+  ""people_non_tapped"": 0,
+  ""people_waiting"": 0
+}
+","{
+  ""total_people"": 3,
+  ""people_tapped"": 1,
+  ""people_non_tapped"": 2,
+  ""people_waiting"": 1
+}",5.08
+2026-01-31 23:23:14,nvidia/Cosmos-Reason2-8B,VTA_Bus_Entry_and_Fare_Kiosk.mp4,4,"You are a vision-based scene analysis system for a fare payment kiosk.
+
+You are given a video sequence showing a kiosk area where people may tap
+their cards or devices to pay fares, and others may be waiting in line.
+
+Your task is to analyze the video and extract exact numeric counts.
+
+---
+
+### Definitions (IMPORTANT)
+- ""people_tapped"": Number of distinct individuals who completed a tap
+  action on the kiosk during the video.
+- ""people_waiting"": Number of distinct individuals waiting in line and
+  NOT yet completed a tap at the end of the video.
+
+Count each person only once.
+
+---
+
+### STRICT OUTPUT RULES (MANDATORY)
+1. Output MUST be valid JSON.
+2. Output JSON ONLY — no text, no explanations, no markdown.
+3. Use integers only (no ranges, no estimates).
+4. If a value cannot be determined with confidence, return 0.
+5. Do NOT include any additional keys.
+
+---
+
+### Output Format (EXACT)
+
+{
+  ""people_tapped"": 0,
+  ""people_waiting"": 0
+}
+","{
+  ""people_tapped"": 3,
+  ""people_waiting"": 1
+}",4.26
+2026-01-31 23:43:02,nvidia/Cosmos-Reason2-8B,VTA_Bus_Entry_and_Fare_Kiosk.mp4,4,"You are a vision-based scene analysis system for a fare payment kiosk.
+
+You are given a video sequence showing a kiosk area where people may tap
+their cards or devices to pay fares, and others may be present or waiting.
+
+Your task is to analyze the video and count people accurately.
+
+---
+
+### Definitions (IMPORTANT)
+- ""total_people"": Total number of distinct individuals visible in the scene.
+- ""people_tapped"": Number of distinct individuals who completed a successful tap
+  on the kiosk during the video.
+- ""people_non_tapped"": Number of distinct individuals who did NOT complete a tap
+  during the video.
+- ""people_waiting"": Number of distinct individuals waiting in line and NOT yet
+  completed a tap at the end of the video.
+
+Logical constraints:
+- people_tapped + people_non_tapped = total_people
+- people_waiting ≤ people_non_tapped
+
+Each person must be counted only once.
+
+---
+
+### STRICT OUTPUT RULES (MANDATORY)
+1. You MUST follow the exact format below.
+2. The <think> block must be brief and high-level.
+3. The final answer MUST be valid JSON.
+4. Output JSON ONLY after </think>.
+5. Use integers only.
+6. Do NOT include any extra keys or text.
+
+---
+
+### REQUIRED OUTPUT FORMAT
+
+<think>
+Brief summary of observations leading to the counts.
+</think>
+
+{
+  ""total_people"": 0,
+  ""people_tapped"": 0,
+  ""people_non_tapped"": 0,
+  ""people_waiting"": 0
+}
+","<think>
+Okay, let's see. The user wants me to analyze the video and count the people based on their actions related to the fare payment kiosk.
+
+First, I need to parse the video carefully. The scene is inside a bus near the front door with a fare payment kiosk. There are several individuals shown. 
+
+The first person is a woman with long dark hair wearing a denim jacket and jeans, carrying a white tote bag. She approaches the kiosk, interacts with it, and then moves away. So she's one of the tapped people.
+
+Then there's another woman with curly blonde hair in a floral top and white pants who enters from the right, walks past the kiosk, and exits. She didn't interact with the kiosk, so she's non-tapped.
+
+Next, a third woman with short dark hair, glasses, a white hoodie, and a brown backpack enters from the left, holding a coffee cup. She approaches the kiosk and interacts with it. That's another tapped person.
+
+After that, a fourth woman with long black hair, a light-colored jacket, and a black top enters from the left, also holding a coffee cup. She stands near the kiosk but doesn't tap yet. So she's waiting.
+
+At the end, all four are near the kiosk. The first two have completed their taps (since they moved away after interacting), the third is still there, and the fourth is waiting. Wait, but the third was interacting with the kiosk. Let me check again.
+
+Wait, the third woman approached the kiosk and interacted with it. So she's tapped. The fourth is standing near it but hasn't tapped yet. So people_tapped would be three (the first, second, and third?), but wait the second didn't tap. Let me recheck.
+
+Wait, the first woman: she approaches, interacts, moves away. So tapped. The second woman walks past the kiosk, doesn't interact. So non-tapped. The third approaches and interacts. Tapped. The fourth enters and stands near the kiosk but doesn't tap. So non-tapped. So total_people is four. People_tapped are two (first and third). People_non_tapped are two (second and fourth). People_waiting: the fourth is waiting, so one. But the third was already tapped. Wait, the video shows ""at the end of the video, all four women are near the kiosk."" So the fourth is still there, not having tapped yet. So people_waiting would be one (the fourth). But the third was already tapped. Wait, the third was interacting with the kiosk. So she's tapped. So people_tapped are two (first and third). People_non_tapped are two (second and fourth). People_waiting: the fourth is waiting, so one. But the third was already tapped. Wait, maybe the third is still waiting? Let me check the video again.
+
+The third woman: ""approaches the kiosk and interacts with it."" So she completed the tap. The fourth: ""stands near the kiosk, holding a coffee cup."" So she hasn't tapped yet. So people_waiting is one (the fourth). So total_people is four. People_tapped: two. People_non_tapped: two. People_waiting: one. That adds up: 2+2=4, and 1≤2. So the answer should be:
+
+{
+  ""total_people"": 4,
+  ""people_tapped"": 2,
+  ""people_non_tapped"": 2,
+  ""people_waiting"": 1
+}
+</think>
+
+{
+  ""total_people"": 4,
+  ""people_tapped"": 2,
+  ""people_non_tapped"": 2,
+  ""people_waiting"": 1
+}",38.33
+2026-01-31 23:43:58,nvidia/Cosmos-Reason2-8B,VTA_Bus_Fare_Evasion_CCTV.mp4,4,"You are a vision-based scene analysis system for a fare payment kiosk.
+
+You are given a video sequence showing a kiosk area where people may tap
+their cards or devices to pay fares, and others may be present or waiting.
+
+Your task is to analyze the video and count people accurately.
+
+---
+
+### Definitions (IMPORTANT)
+- ""total_people"": Total number of distinct individuals visible in the scene.
+- ""people_tapped"": Number of distinct individuals who completed a successful tap
+  on the kiosk during the video.
+- ""people_non_tapped"": Number of distinct individuals who did NOT complete a tap
+  during the video.
+- ""people_waiting"": Number of distinct individuals waiting in line and NOT yet
+  completed a tap at the end of the video.
+
+Logical constraints:
+- people_tapped + people_non_tapped = total_people
+- people_waiting ≤ people_non_tapped
+
+Each person must be counted only once.
+
+---
+
+### STRICT OUTPUT RULES (MANDATORY)
+1. You MUST follow the exact format below.
+2. The <think> block must be brief and high-level.
+3. The final answer MUST be valid JSON.
+4. Output JSON ONLY after </think>.
+5. Use integers only.
+6. Do NOT include any extra keys or text.
+
+---
+
+### REQUIRED OUTPUT FORMAT
+
+<think>
+Brief summary of observations leading to the counts.
+</think>
+
+{
+  ""total_people"": 0,
+  ""people_tapped"": 0,
+  ""people_non_tapped"": 0,
+  ""people_waiting"": 0
+}
+","<think>
+Okay, let's see. The user wants me to analyze the video sequence and count the people based on their interactions with the fare payment kiosk.
+
+First, I need to parse the video carefully. The main elements are the man in a gray suit who taps his card on the kiosk, and the older man with a blue bag who approaches but doesn't tap. There's also a third person shown as being seated in the background.
+
+So, breaking it down: the man in the gray suit is clearly tapping, so he's a ""people_tapped"" case. The older man with the blue bag is approaching but not tapping yet, so he's a ""people_non_tapped"" and possibly ""people_waiting"" since he's moving towards the kiosk. The third person is just sitting in the background, not interacting, so they're part of ""people_non_tapped"" as well.
+
+Wait, the video shows the older man is ""approaching the kiosk but does not tap it."" So he's in the process of moving towards it but hasn't completed the tap. That means he's waiting, right? So ""people_waiting"" would include him. But the third person is seated and not doing anything, so they're just non-tapped.
+
+So total people would be three: the gray suit man, the older man, and the third person. Tapped is one (gray suit), non-tapped is two (older man and third person). But the older man is waiting, so people_waiting is one. The third person isn't waiting, just present. So people_waiting is one, people_non_tapped is two. That adds up correctly.
+
+I need to make sure I'm not double-counting anyone. Each person is distinct. The gray suit man is tapped, the older man is non-tapped and waiting, the third person is non-tapped and not waiting. So the counts should be total_people: 3, people_tapped: 1, people_non_tapped: 2, people_waiting: 1.
+</think>
+
+{
+  ""total_people"": 3,
+  ""people_tapped"": 1,
+  ""people_non_tapped"": 2,
+  ""people_waiting"": 1
+}",23.83
+2026-01-31 23:56:33,nvidia/Cosmos-Reason2-8B,space_2.mp4,4,"You are a vision-based scene understanding and decision-making system.
+
+You are given a video sequence showing a physical space (e.g., kiosk area,
+platform, room, or open environment) with people and objects.
+
+Your task is to:
+1. Describe what is happening in the scene.
+2. Identify any anomaly or unusual behavior in the space.
+3. Suggest the most appropriate next action.
+
+---
+
+### Definitions
+- ""scene_description"": A concise factual summary of what is observed.
+- ""anomaly_detected"": True if behavior, motion, count, or interaction deviates
+  from normal expectations for this space; otherwise false.
+- ""anomaly_description"": Description of the anomaly, or null if none.
+- ""suggested_next_action"": The recommended action based on the scene and anomaly.
+
+---
+
+### STRICT OUTPUT RULES (MANDATORY)
+1. You MUST follow the exact output format below.
+2. Reasoning is allowed ONLY inside <think>...</think>.
+3. The final answer MUST be valid JSON.
+4. Output JSON ONLY after </think>.
+5. Do NOT include markdown, explanations, or extra text.
+6. Use null explicitly if no anomaly exists.
+
+---
+
+### REQUIRED OUTPUT FORMAT
+
+<think>
+Brief reasoning based on observations, scene dynamics, and anomaly assessment.
+</think>
+
+{
+  ""scene_description"": """",
+  ""anomaly_detected"": false,
+  ""anomaly_description"": null,
+  ""suggested_next_action"": """"
+}
+","<think>
+Okay, let's see. The video shows a person inside the International Space Station (ISS), specifically in a module that appears to be a sleep station or similar area. The individual is seated on a bench-like structure, wearing a dark sweater and light-colored shorts. They have curly hair that is floating around their head due to the microgravity environment. The person is holding a piece of paper in one hand and gesturing with the other, possibly explaining something about the surroundings.
+
+The background reveals various equipment and storage compartments typical of an ISS module. There are blue panels with tools and supplies neatly arranged, cables running along the walls, and a circular hatch leading to another section of the station. The overall setting is compact and functional, designed for efficient use of space in the zero-gravity environment.
+
+The person seems to be engaged in a demonstration or explanation, as indicated by their hand movements and the presence of the paper. The video likely aims to provide viewers with an insight into daily life aboard the ISS, highlighting the unique challenges and adaptations required for living and working in space. The video does not contain anomalies or artifacts.
+</think>
+
+{
+  ""scene_description"": ""A person is seated in a microgravity environment within the International Space Station, gesturing while holding a piece of paper. The setting includes typical ISS equipment, storage compartments, and a circular hatch in the background. The person's curly hair floats freely due to zero gravity, and they appear to be explaining or demonstrating something related to the station's features."",
+  ""anomaly_detected"": false,
+  ""anomaly_description"": null,
+  ""suggested_next_action"": ""Continue gesturing and explaining while maintaining balance in the microgravity environment.""
+}",19.50
+2026-01-31 23:58:39,nvidia/Cosmos-Reason2-8B,space_1.mp4,4,"You are a vision-based scene understanding and decision-making system.
+
+You are given a video sequence showing a physical space (e.g., kiosk area,
+platform, room, or open environment) with people and objects.
+
+Your task is to:
+1. Describe what is happening in the scene.
+2. Identify any anomaly or unusual behavior in the space.
+3. Suggest the most appropriate next action.
+
+---
+
+### Definitions
+- ""scene_description"": A concise factual summary of what is observed.
+- ""anomaly_detected"": True if behavior, motion, count, or interaction deviates
+  from normal expectations for this space; otherwise false.
+- ""anomaly_description"": Description of the anomaly, or null if none.
+- ""suggested_next_action"": The recommended action based on the scene and anomaly.
+
+---
+
+### STRICT OUTPUT RULES (MANDATORY)
+1. You MUST follow the exact output format below.
+2. Reasoning is allowed ONLY inside <think>...</think>.
+3. The final answer MUST be valid JSON.
+4. Output JSON ONLY after </think>.
+5. Do NOT include markdown, explanations, or extra text.
+6. Use null explicitly if no anomaly exists.
+
+---
+
+### REQUIRED OUTPUT FORMAT
+
+<think>
+Brief reasoning based on observations, scene dynamics, and anomaly assessment.
+</think>
+
+{
+  ""scene_description"": """",
+  ""anomaly_detected"": false,
+  ""anomaly_description"": null,
+  ""suggested_next_action"": """"
+}
+","<think>
+Okay, let's see. The video shows a woman in a space station module, dressed in a dark jacket over a white shirt. She's moving around in a zero-gravity environment, which is why her hair is floating. The module has metallic walls with various equipment and cables. There's an open hatchway behind her leading to another section. The video is clean and organized, typical of a space station. The video does not show any anomalies or unusual behavior. The next action would likely be her continuing to move through the module, maybe interacting with equipment or preparing for a task.
+</think>
+
+{
+  ""scene_description"": ""A woman is seen inside a space station module, floating in zero gravity. She is wearing a dark jacket over a white shirt and appears to be moving through the module while speaking. The module is equipped with various technical devices, cables, and storage compartments. An open hatchway in the background reveals another section of the station, indicating a continuous layout. The environment is clean and organized, typical of a space station interior."",
+  ""anomaly_detected"": false,
+  ""anomaly_description"": null,
+  ""suggested_next_action"": ""Continue moving through the module while interacting with equipment or preparing for a task.""
+}",17.60

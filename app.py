@@ -43,7 +43,7 @@ def load_model(model_name):
             device_map="auto", 
             attn_implementation="sdpa", 
             token=hf_token,
-            trust_remote_code=True
+            trust_remote_code=True,
         )
     except (AttributeError, ImportError):
         # Fall back to AutoModelForVision2Seq
@@ -117,7 +117,7 @@ def process_video():
         
         # Run inference with timing
         start_time = time.time()
-        generated_ids = model.generate(**inputs, max_new_tokens=4096)
+        generated_ids = model.generate(**inputs, max_new_tokens=4096, temperature=0.0 , do_sample=False)
         generated_ids_trimmed = [
             out_ids[len(in_ids) :]
             for in_ids, out_ids in zip(inputs.input_ids, generated_ids, strict=False)
